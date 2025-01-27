@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
 
 public class DataSupplierTest {
 
-    @Test(dataProvider = "getData")
+    @Test(dataProvider = "getDataSupplier")
     public void myTest(TestData data) {
         System.out.println(data.username);
     }
 
     @DataSupplier
-    public StreamEx<TestData> getData() {
+    public StreamEx<TestData> getDataSupplier() {
         return TestDataReader.use(XlsxReader.class).withTarget(TestData.class)
                 .withSource("TestData.xlsx").read().
                 filter(testname -> testname.testName.equals("loginTest"));
